@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>IMC Prototype</title>
+    <style type="text/css">
+      .wrapper{
+        overflow:hidden;
+        margin-bottom:10px;
+      }
+      .item{
+        float:left;
+        margin:10px;
+        overflow: auto;
+        max-height: 300px;
+        height: 300px;
+        width: 300px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper" id="widgetGrid">
+      <div class="item" id="localEvents">Local Events<br/><ul id="eventlog"></ul></div>
+      <div class="item" id="rulesEngine">Rules Engine<br/><select name="variables"><option>sev</option></select> = 0 </div>
+      <div class="item" id="rulesEngine"><iframe height="300" width="300" src="http://10.252.134.160:5000/"/></div>
+    </div>
+
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var socket = io();
+      $( document ).ready(function() {
+        socket.emit('log', 'IMC Started');
+      });
+      socket.on('log', function(msg){
+        $('#eventlog').append($('<li>').text(msg));
+        if(msg === 'GUSWidget - {severity} set to {Sev0}'){
+          socket.emit('log', 'Rules Engine requests PagerDuty.Paged()');
+        }
+      });
+      socket.on('newWidget', function(widgetName, widgetLocation, actions, variables){
+        if($("#" + widgetName).length == 0) {
+          $('#widgetGrid').append('<div class="item" id="'+widgetName+'"><iframe height="300" width="300" id="'+widgetName+'location" src="'+widgetLocation+'"/></div>');
+        } else {
+          $('#'+widgetName+'location').attr('src', widgetLocation);
+        }
+      });
+    </script>
+  </body>
+</html>
