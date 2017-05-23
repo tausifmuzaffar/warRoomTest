@@ -1,39 +1,18 @@
-# node-js-getting-started
+static-heroku-node
+==================
 
-A barebones Node.js app using [Express 4](http://expressjs.com/).
+This is a super simple application built to be run on
+Heroku to host a static site. Fork (or clone) the repo,
+place all your files in the public/ directory and you're done.
 
-This application supports the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
+If you wish to test it and you have the Heroku toolbelt installed,
+start the application with `foreman start` and navigate to
+http://localhost:5000/ to see how your site/app will look.
 
-## Running Locally
+If you're ready to deploy to heroku, simply:
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed.
-
-```sh
-$ git clone git@github.com:heroku/node-js-getting-started.git # or clone your own fork
-$ cd node-js-getting-started
-$ npm install
-$ npm start
-```
-
-Your app should now be running on [localhost:5000](http://localhost:5000/).
-
-## Deploying to Heroku
-
-```
-$ heroku create
+```bash
+$ heroku apps:create
 $ git push heroku master
-$ heroku open
+$ heroku apps:open
 ```
-or
-
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
-## Documentation
-
-For more information about using Node.js on Heroku, see these Dev Center articles:
-
-- [Getting Started with Node.js on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
-- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
-- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
